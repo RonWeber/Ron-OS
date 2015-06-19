@@ -23,6 +23,4 @@ enum vga_color {
 void terminal_print(const char* data, uint8_t color);
 void terminal_initialize();
 
-uint8_t make_color(enum vga_color fg, enum vga_color bg) {
-	return fg | bg << 4;
-}
+uint8_t make_color(enum vga_color fg, enum vga_color bg);

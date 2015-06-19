@@ -13,6 +13,10 @@ size_t strlen(const char* str)
 static const size_t VGA_WIDTH = 80;
 static const size_t VGA_HEIGHT = 25;
 
+uint8_t make_color(enum vga_color fg, enum vga_color bg) {
+	return fg | bg << 4;
+}
+
 uint16_t make_vgaentry(char c, uint8_t color) {
 	uint16_t c16 = c;
 	uint16_t color16 = color;
@@ -48,6 +52,7 @@ void terminal_putchar(char c, uint8_t color)
 {
     if (c == '\n') //Newlines have to be supported at some point.
     {
+	terminal_col = 0;
 	if (++terminal_row == VGA_HEIGHT)
 	{
 	    terminal_row = 0;
