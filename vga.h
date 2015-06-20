@@ -1,7 +1,7 @@
 #pragma once
 #include <stdint.h>
 
-enum vga_color {
+typedef enum {
 	COLOR_BLACK = 0,
 	COLOR_BLUE = 1,
 	COLOR_GREEN = 2,
@@ -18,10 +18,10 @@ enum vga_color {
 	COLOR_LIGHT_MAGENTA = 13,
 	COLOR_LIGHT_BROWN = 14,
 	COLOR_WHITE = 15,
-};
+} vga_color;
 
 void terminal_print(const char* data, uint8_t color);
 void printk(const char* string);
 void terminal_initialize();
 
-uint8_t make_color(enum vga_color fg, enum vga_color bg);
+uint8_t make_color(vga_color fg, vga_color bg);

@@ -13,7 +13,7 @@ size_t strlen(const char* str)
 static const size_t VGA_WIDTH = 80;
 static const size_t VGA_HEIGHT = 25;
 
-uint8_t make_color(enum vga_color fg, enum vga_color bg) {
+uint8_t make_color(vga_color fg, vga_color bg) {
 	return fg | bg << 4;
 }
 

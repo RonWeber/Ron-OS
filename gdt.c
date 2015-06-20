@@ -14,7 +14,7 @@ gdt_entry format_gdt_entry(uint32_t limit,  uint32_t base,
     /*Given that I'm only going to use this a few times,
       an alternative would be precomputing this.  Computing at runtime
       allows more flexability, however.
-      And the math is not _more_ error prone if I go it later.*/
+      And the math is not _more_ error prone if I do it later.*/
     gdt_entry result;
     result.limit_low = (uint16_t) (limit & LOWEST_SIXTEEN_BITS);
     result.base_low = (uint16_t) (base & LOWEST_SIXTEEN_BITS);

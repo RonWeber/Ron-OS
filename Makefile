@@ -1,5 +1,5 @@
 
-SOURCES=start.o main.o vga.o
+SOURCES=start.o main.o vga.o gdt.o
 
 CFLAGS=-std=gnu99 -ffreestanding -O2 -Wall -Wextra
 CC = i686-elf-gcc
