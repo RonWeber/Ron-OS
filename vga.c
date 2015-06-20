@@ -78,3 +78,10 @@ void terminal_print(const char* data, uint8_t color)
     for (size_t i = 0; i < datalen; i++)
 	terminal_putchar(data[i], color);
 }
+
+const vga_color DEFAULT_FOREGROUND = COLOR_LIGHT_BLUE;
+const vga_color DEFAULT_BACKGROUND = COLOR_BLACK;
+void printk(const char* string)
+{
+    terminal_print(string, make_color(DEFAULT_FOREGROUND, DEFAULT_BACKGROUND));
+}

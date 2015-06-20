@@ -16,5 +16,5 @@ void main()
 {
     terminal_initialize();
 
-    terminal_print("ROS super early dev version.\nHoly crap, it actually worked!\n", make_color(COLOR_LIGHT_BLUE, COLOR_BLACK));
+    printk("ROS once again managed to boot, despite all odds.\n");
 }
