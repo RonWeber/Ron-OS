@@ -6,7 +6,7 @@ const uint32_t LOWEST_EIGHT_BITS = 0x000000FF;
 const uint32_t LOWEST_FOUR_BITS = 0x0000000F;
 const uint32_t LOWEST_TWO_BITS = 0x00000003;
 
-gdt_entry format_gdt_entry(uint32_t limit,  uint32_t base,
+GdtEntry format_gdt_entry(uint32_t limit,  uint32_t base,
 			 uint8_t segment_type, bool descriptor_type,
 			 uint8_t privilege_level, bool present,
 			 bool granularity_is_kb, bool operand_is_32_bit)
@@ -15,7 +15,7 @@ gdt_entry format_gdt_entry(uint32_t limit,  uint32_t base,
       an alternative would be precomputing this.  Computing at runtime
       allows more flexability, however.
       And the math is not _more_ error prone if I do it later.*/
-    gdt_entry result;
+    GdtEntry result;
     result.limit_low = (uint16_t) (limit & LOWEST_SIXTEEN_BITS);
     result.base_low = (uint16_t) (base & LOWEST_SIXTEEN_BITS);
     result.base_middle = (uint8_t) ((base << 16) & LOWEST_EIGHT_BITS);
@@ -29,4 +29,12 @@ gdt_entry format_gdt_entry(uint32_t limit,  uint32_t base,
 			  (granularity_is_kb >> 7));
     result.base_high = (uint8_t) ((base << 24) & LOWEST_EIGHT_BITS);
     return result;
+}
+
+void gdt_initialize()
+{
+    gdt_ptr.limit = (sizeof(GdtEntry) * NUM_GDT_ENTRIES) - 1;
+    gdt_ptr.base = (uint32_t)&gdt_entries;
+
+    
 }
