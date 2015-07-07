@@ -70,4 +70,15 @@ void gdt_initialize()
 {
     gdt_ptr.limit = (sizeof(GdtEntry) * NUM_GDT_ENTRIES) - 1;
     gdt_ptr.base = (uint32_t)&gdt_entries;
+
+    gdt_entries[0] = create_descriptor(0, 0, 0);
+    gdt_entries[1] = create_descriptor(0, 0x000FFFFF, GDT_CODE_PL0);
+    gdt_entries[2] = create_descriptor(0, 0x000FFFFF, GDT_DATA_PL0);
+    gdt_entries[3] = create_descriptor(0, 0x000FFFFF, GDT_CODE_PL3);
+    gdt_entries[4] = create_descriptor(0, 0x000FFFFF, GDT_DATA_PL3);
+
+    gdt_flush(gdt_ptr);
+    
 }
+
+extern void gdt_flush(uint32_t);

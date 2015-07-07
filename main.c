@@ -17,4 +17,10 @@ void main()
     terminal_initialize();
 
     printk("ROS once again managed to boot, despite all odds.\n");
+
+    printk("Initializing GDT...\n");
+
+    gdt_initialize();
+
+    printk("That managed to work too!");
 }
