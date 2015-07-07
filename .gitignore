@@ -3,3 +3,6 @@
 
 #The kernel itself
 *.bin
+
+#For emacs/etags
+TAGS

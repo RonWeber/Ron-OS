@@ -67,5 +67,6 @@ uint64_t create_descriptor(uint32_t base, uint32_t limit, uint16_t flag)
 
 void gdt_initialize()
 {
-    
+    gdt_ptr.limit = (sizeof(GdtEntry) * NUM_GDT_ENTRIES) - 1;
+    gdt_ptr.base = (uint32_t)&gdt_entries;
 }
