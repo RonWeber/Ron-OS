@@ -10,6 +10,7 @@
 #include <stdint.h>
 
 #include "vga.h"
+#include "gdt.h"
 
 
 void main()
@@ -22,5 +23,5 @@ void main()
 
     gdt_initialize();
 
-    printk("That managed to work too!");
+    printk("Preparing interrupt table...\n");
 }
