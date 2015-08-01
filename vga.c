@@ -1,14 +1,7 @@
 #include "vga.h"
 #include <stdint.h>
 #include <stddef.h>
-
-size_t strlen(const char* str)
-{
-	size_t nullCharPos = 0;
-	while (str[nullCharPos] != 0)
-		nullCharPos++;
-	return nullCharPos;
-}
+#include "string.h"
 
 static const size_t VGA_WIDTH = 80;
 static const size_t VGA_HEIGHT = 25;
