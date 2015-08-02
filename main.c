@@ -11,6 +11,7 @@
 
 #include "vga.h"
 #include "gdt.h"
+#include "print.h"
 
 
 void main()

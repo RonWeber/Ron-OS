@@ -21,7 +21,7 @@ typedef enum {
 } vga_color;
 
 void terminal_print(const char* data, uint8_t color);
-void printk(const char* string);
+
 void terminal_initialize();
 
 uint8_t make_color(vga_color fg, vga_color bg);
