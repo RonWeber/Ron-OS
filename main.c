@@ -11,6 +11,7 @@
 
 #include "vga.h"
 #include "gdt.h"
+#include "idt.h"
 #include "print.h"
 
 
@@ -25,4 +26,10 @@ void main()
     gdt_initialize();
 
     printk("Preparing interrupt table...\n");
+
+    idt_initialize();
+
+    printk("Running test interrupt 0x3");
+
+    asm volatile ("int $0x03");
 }
