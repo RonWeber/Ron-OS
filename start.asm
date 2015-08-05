@@ -33,9 +33,10 @@ start:
 	;; Linker script specifies "start" as important.
 
 	call main		;Call main()
-	;; After cli, the hlt will stop everything.
-	cli
 
-hang:
+	;; After cli, the hlt will stop everything.
+	global shut_down_everything
+shut_down_everything:
+	cli
 	hlt
 	jmp $ 			;If main() exits, we don't want to be executing random memory.

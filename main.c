@@ -32,4 +32,6 @@ void main()
     printk("Running test interrupt 0x3");
 
     asm volatile ("int $0x03");
+
+    printk("Returned from interrupt handler.");
 }
