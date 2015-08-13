@@ -29,9 +29,9 @@ void main()
 
     idt_initialize();
 
-    printk("Running test interrupt 0x3");
+    printk("Running test interrupt 0x3\n");
 
     asm volatile ("int $0x03");
 
-    printk("Returned from interrupt handler.");
+    printk("Returned from interrupt handler.\n");
 }
