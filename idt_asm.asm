@@ -67,7 +67,15 @@ isr_common:
 
 	iret
 	
+%macro IRQ 2
+	;;%1 is the number from 0-15, %2 is from 32-47.
+	;;%2 will be %1 + 32
+	[global irq%1]
+irq%1:
+	cli
+	push byte 0
+	push byte %2
+	jmp irq_common_stub
+%endmacro
 	
-	
-	
-	
+irq_common_stub:	
