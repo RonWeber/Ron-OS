@@ -34,4 +34,6 @@ void main()
     asm volatile ("int $0x03");
 
     printk("Returned from interrupt handler.\n");
+
+    asm volatile ("hlt"); //Wait for an interrupt.
 }

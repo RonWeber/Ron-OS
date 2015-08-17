@@ -1,5 +1,6 @@
 #include "interrupts.h"
 #include "print.h"
+#include "io.h"
 
 void interrupt_handler(Registers registers)
 {
@@ -19,5 +20,9 @@ void irq_handler(Registers registers)
     //Send reset signal to master PIC.
     outb(0x20, 0x20);
 
+    printk("Unhandled IRQ: ");
+    print_int(registers.interruptNumber);
+    printk("\n");
+    //TODO: Handle this situation in some way.
 }
 

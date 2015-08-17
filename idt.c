@@ -1,5 +1,6 @@
 #include "idt.h"
 #include "string.h"
+#include "io.h"
 #include <stdint.h>
 
 static void idt_set_gate(uint8_t, uint32_t, uint16_t, uint8_t);
@@ -79,7 +80,10 @@ void idt_set_gate(uint8_t entryNumber, uint32_t offset, uint16_t selector, uint8
     //In user mode, this would be
     //idt[num].flags = flags | 0x60
 }
-
+#define PIC1_CMD                    0x20
+#define PIC1_DATA                   0x21
+#define PIC2_CMD                    0xA0
+#define PIC2_DATA                   0xA1
 #define ICW1_ICW4	0x01		/* ICW4 (not) needed */
 #define ICW1_SINGLE	0x02		/* Single (cascade) mode */
 #define ICW1_INTERVAL4	0x04		/* Call address interval 4 (8) */
@@ -106,23 +110,14 @@ void PIC_remap(int offset1, int offset2)
 	a1 = inb(PIC1_DATA);                        // save masks
 	a2 = inb(PIC2_DATA);
  
-	outb(PIC1_COMMAND, ICW1_INIT+ICW1_ICW4);  // starts the initialization sequence (in cascade mode)
-	io_wait();
-	outb(PIC2_COMMAND, ICW1_INIT+ICW1_ICW4);
-	io_wait();
+	outb(PIC1_CMD, ICW1_INIT+ICW1_ICW4);  // starts the initialization sequence (in cascade mode)
+	outb(PIC2_CMD, ICW1_INIT+ICW1_ICW4);
 	outb(PIC1_DATA, offset1);                 // ICW2: Master PIC vector offset
-	io_wait();
 	outb(PIC2_DATA, offset2);                 // ICW2: Slave PIC vector offset
-	io_wait();
 	outb(PIC1_DATA, 4);                       // ICW3: tell Master PIC that there is a slave PIC at IRQ2 (0000 0100)
-	io_wait();
 	outb(PIC2_DATA, 2);                       // ICW3: tell Slave PIC its cascade identity (0000 0010)
-	io_wait();
- 
 	outb(PIC1_DATA, ICW4_8086);
-	io_wait();
 	outb(PIC2_DATA, ICW4_8086);
-	io_wait();
  
 	outb(PIC1_DATA, a1);   // restore saved masks.
 	outb(PIC2_DATA, a2);
