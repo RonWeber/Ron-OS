@@ -13,7 +13,7 @@
 #include "gdt.h"
 #include "idt.h"
 #include "print.h"
-
+#include "keyboard.h"
 
 void main()
 {
@@ -35,5 +35,7 @@ void main()
 
     printk("Returned from interrupt handler.\n");
 
-    asm volatile ("hlt"); //Wait for an interrupt.
+    printk("Initializing keyboard");
+
+    keyboard_initialize();
 }
