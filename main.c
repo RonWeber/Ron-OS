@@ -35,7 +35,9 @@ void main()
 
     printk("Returned from interrupt handler.\n");
 
-    printk("Initializing keyboard");
+    printk("Initializing keyboard\n");
 
     keyboard_initialize();
+
+    asm volatile ("hlt"); //Wait for an interrupt.
 }
